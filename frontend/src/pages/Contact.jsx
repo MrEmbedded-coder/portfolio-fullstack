@@ -32,7 +32,7 @@ function Contact() {
 
     try {
       const response = await fetch(
-        "https://portfolio-fullstack-ge9r.onrender.com.contact",
+        "https://portfolio-fullstack-ge9r.onrender.com/contact",
       {
         method: "POST",
         headers: {
