@@ -134,7 +134,7 @@ function Contact() {
 
                 <p className="text-lg font-semibold">
 
-                  adoum@example.com
+                  adoummoussaramat@gmail.com
 
                 </p>
 

@@ -33,57 +33,54 @@ app.get("/", (req, res) => {
 //Contact route
 app.post("/contact", async (req, res) => {
 
-  const { name, email, message } = req.body
-
   try {
 
-    await transporter.sendMail({
+    const { name, email, message } = req.body
+
+    console.log("Received data:", req.body)
+
+    const mailOptions = {
 
       from: process.env.EMAIL_USER,
 
       to: process.env.EMAIL_USER,
 
-      subject: `New message from ${name}`,
+      subject: `Portfolio Message from ${name}`,
 
-      html: `
+      text: `
+Name: ${name}
 
-        <h2>New Contact Message</h2>
+Email: ${email}
 
-        <p><strong>Name:</strong> ${name}</p>
+Message:
+${message}
+      `,
+    }
 
-        <p><strong>Email:</strong> ${email}</p>
+    console.log("Sending email...")
 
-        <p><strong>Message:</strong> ${message}</p>
+    const info = await transporter.sendMail(mailOptions)
 
-      `
-
-    })
+    console.log("Email sent:", info.response)
 
     res.status(200).json({
-
-      success: true,
-
-      message: "Email sent successfully"
-
+      message: "Message sent successfully",
     })
 
-  }
+  } catch (error) {
 
-  catch (error) {
-
-    console.log(error)
+    console.log("EMAIL ERROR:", error)
 
     res.status(500).json({
-
-      success: false,
-
-      message: "Failed to send email"
-
+      message: "Failed to send email",
     })
 
   }
 
 })
+
+
+    
 
 // Port
 
